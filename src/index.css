@@ -56,19 +56,21 @@ label{
   grid-row-gap: 10px;
 }
 
+
 .activity-level{
   padding-top: 10px;
   padding-bottom: 10px;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 10px;
 }
 
-.activity-level label{
-  padding-right: 68px;
-}
+
 
 .activity-level select{
-  width: 165px;
-  font-size: 10px;
-}
+  font-size: 12px;
+} 
 
 #calculate-btn {
   background-color: #6f5be3;
