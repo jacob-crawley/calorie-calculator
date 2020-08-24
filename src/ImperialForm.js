@@ -13,9 +13,9 @@ export class ImperialForm extends React.Component{
     }
 
     handleWeightChange(e) {
+        // convert lbs value to kg before storing in parent state
         const weight = e.target.value;
-        this.props.weightChange(weight);
-        
+        this.props.weightChange(weight*0.453592);
     }
 
     handleAgeChange(e){
@@ -53,7 +53,7 @@ export class ImperialForm extends React.Component{
         return (
             <div class="form-inputs">
                 <label for="product_name">Weight</label>
-                <input id="product_name"  type="text" maxlength="5" class="form-control" placeholder="(lbs)" onChange={this.handleWeightChange}/>
+                <input id="product_name"  type="text" maxlength="6" class="form-control" placeholder="(lbs)" onChange={this.handleWeightChange}/>
             
                 <label for="product_name">Age</label>
                 <input id="product_name" type="number" maxlength="5" class="form-control" placeholder="(years)"onChange={this.handleAgeChange}/>

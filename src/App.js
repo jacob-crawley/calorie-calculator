@@ -8,7 +8,7 @@ class App extends React.Component{
       <div>
       <h1>Calorie Calculator</h1>
       <EntryForm />
-      <footer>
+      <footer class="footer">
         <small>© Jacob Crawley, 2020</small>
       </footer>
       </div>

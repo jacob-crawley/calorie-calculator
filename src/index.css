@@ -26,23 +26,30 @@ main {
   margin-right: auto;
   border-style: outset;
   border-color: darkgray;
-  min-width: 360px;
+  min-width: 400px;
   max-width: 700px;
   padding-top: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 50px;
   padding-left: 15px;
+  margin-bottom: 10px;
 }
 
-.entry-form > label
-{
-  float: left;
-  clear: right;
+.measurement-choice input{
+  margin-right: 8px;
 }
 
-.entry-form > input
-{
-  float: right;
+.gender-choice{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 10px;
 }
+
+.gender-choice select{
+  font-size: 12px;
+} 
 
 label{
   padding-right: 10px;
@@ -66,8 +73,6 @@ label{
   grid-row-gap: 10px;
 }
 
-
-
 .activity-level select{
   font-size: 12px;
 } 
@@ -82,9 +87,10 @@ label{
 }
 
 footer{
-  z-index: 2;
-  position: relative;
-  position: fixed;
+  height: 20px;
+  margin-top: -50px;
+  padding-top: 50px;
+  padding-bottom: 10px;
   left: 0;
   bottom: 0;
   width: 100%;

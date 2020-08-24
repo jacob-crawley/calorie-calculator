@@ -29,7 +29,7 @@ export class MetricForm extends React.Component{
         return (
             <div class="form-inputs">
                 <label for="product_name">Weight</label>
-                <input id="product_name"  type="text" maxlength="5" placeholder="(kg)" class="form-control" onChange={this.handleWeightChange}/>
+                <input id="product_name"  type="text" maxlength="6" placeholder="(kg)" class="form-control" onChange={this.handleWeightChange}/>
             
                 <label for="product_name">Age</label>
                 <input id="product_name" type="text" maxlength="5" placeholder="(years)"class="form-control" onChange={this.handleAgeChange}/>

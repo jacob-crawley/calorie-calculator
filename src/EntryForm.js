@@ -3,23 +3,32 @@ import ReactDOM from 'react-dom';
 import {MetricForm} from './MetricForm';
 import {ImperialForm} from './ImperialForm';
 import {ActivityLevel} from './ActivityLevel';
+import {Result} from './Result';
 
-
-export class EntryForm extends React.Component{
+export class EntryForm extends React.PureComponent{
     constructor(props) {
         super(props);
-        this.state = { age: '', weight: '', activity: '', height: '', measurement: '',
-                    measurementSelected: false};
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { age: '', gender: '', weight: '', activity: '', height: '', measurement: '',
+                    measurementSelected: false, result: '', showResult: false, resultForm: ''};
+        this.handleMeasurementChange = this.handleMeasurementChange.bind(this);
+        this.changeGender = this.changeGender.bind(this);
         this.changeWeight = this.changeWeight.bind(this);
         this.changeAge = this.changeAge.bind(this);
         this.changeHeight = this.changeHeight.bind(this);
         this.changeActivity = this.changeActivity.bind(this);
+        this.getCalories = this.getCalories.bind(this);
+       
     }
 
-    handleChange(event){
+    handleMeasurementChange(event){
         this.setState({
             measurement: event.target.value, measurementSelected: true
+        });
+    }
+
+    changeGender(event){
+        this.setState({
+            gender: event.target.value
         });
     }
 
@@ -47,24 +56,80 @@ export class EntryForm extends React.Component{
         });
     }
 
+    getCalories(event){
+        this.setState({
+            showResult: true,
+            resultForm: <Result calories={this.calculateCalories()} measurementType={this.state.measurement}/>
+        })
+        //event.preventDefault();
+        this.forceUpdate();
+    }
+
+    // Calculate BMR from form data using Harris-Benedict Equation
+    calculateCalories(){
+        let bmr = 0;
+        // use equation to get bmr (calroies burned at rest)
+        if (this.state.gender == 'male'){
+            bmr = 66.473 + (13.75116*this.state.weight) + (5.033*this.state.height)-(6.755*this.state.age);
+        } else {
+            bmr = 655.0955 + (9.5634*this.state.weight) + (1.8496*this.state.height)-(4.6756*this.state.age);
+        }
+        // adjust bmr according to activity level
+        switch (this.state.activity){
+            case 'none':
+                bmr = bmr * 1.2;
+                break;
+            case 'light':
+                bmr = bmr * 1.375;
+                break;
+            case 'moderate':
+                bmr = bmr * 1.55;
+                break;
+            case 'heavy':
+                bmr = bmr * 1.725;
+                break;
+            case 'v-heavy':
+                bmr = bmr * 1.9;
+                break;
+        }
+
+        return Math.round(bmr);
+    }
+
+
     render() {
         return (
-          <div class="entry-form">
-            <form>
-                <p>Select unit of measurement:</p>
-                <div class="measurement-choice">
-                    <input type="radio" id="metric" value="metric" checked={this.state.measurement == "metric"} onChange={this.handleChange}/>
-                    <label for="metric">Metric (kg/cm)</label>
-                    <input type="radio" id="imperial"  value="imperial" checked={this.state.measurement == "imperial"}onChange={this.handleChange}/>
-                    <label for="female">Imperial (lbs/feet+inches)</label>
-                </div>
-                {this.state.measurement == 'metric' && <MetricForm weightChange={this.changeWeight} ageChange={this.changeAge} heightChange={this.changeHeight}/>}
-                {this.state.measurement == 'imperial' && <ImperialForm weightChange={this.changeWeight} ageChange={this.changeAge} heightChange={this.changeHeight}/>}
-                {this.state.measurementSelected && <ActivityLevel onChange={this.changeActivity}/>}
-                {this.state.measurementSelected &&  
-                <button type="submit" class="btn btn-primary" id="calculate-btn">Calculate my calories</button>}
-                <p>{this.state.height}</p>
-            </form>
+          <div>
+            <div class="entry-form">
+                <form>
+                    <p>Select unit of measurement:</p>
+                    <div class="measurement-choice">
+                        <input type="radio" id="metric" value="metric" checked={this.state.measurement == "metric"} onChange={this.handleMeasurementChange}/>
+                        <label for="metric">Metric (kg/cm)</label>
+                        <input type="radio" id="imperial"  value="imperial" checked={this.state.measurement == "imperial"}onChange={this.handleMeasurementChange}/>
+                        <label for="female">Imperial (lbs/feet+inches)</label>
+                    </div>
+
+                    <div class='gender-choice'>
+                        <label for='gender'>Gender</label>
+                        <select name='gender' id='gender' class="browser-default custom-select" onChange={this.changeGender}>
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    
+                    {this.state.measurement == 'metric' && <MetricForm weightChange={this.changeWeight} ageChange={this.changeAge} heightChange={this.changeHeight}/>}
+                    {this.state.measurement == 'imperial' && <ImperialForm weightChange={this.changeWeight} ageChange={this.changeAge} heightChange={this.changeHeight}/>}
+                    {this.state.measurementSelected && <ActivityLevel onChange={this.changeActivity}/>}
+                    {this.state.measurementSelected &&  
+                    <button type="button" class="btn btn-primary" id="calculate-btn" onClick={this.getCalories}>Calculate my calories</button>}
+                </form>
+            </div>
+            <div >
+                {this.state.showResult && this.state.resultForm}
+            </div>
+           
           </div>
         );
     }
