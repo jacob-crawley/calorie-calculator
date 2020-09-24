@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { PieChart } from 'react-minimal-pie-chart';
 
 export class Result extends React.Component{
     constructor(props) {
@@ -9,8 +7,7 @@ export class Result extends React.Component{
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log(props.measurementType);
-        if (props.measurementType == "metric"){
+        if (props.measurementType === "metric"){
             return {weightType: 'kg', weightValue: 0.5}
         } else {
             return {weightType: 'lbs', weightValue: 1}
@@ -22,8 +19,10 @@ export class Result extends React.Component{
         return(
             <div class="entry-form">
                 <form>
-                    <h2>{this.props.calories} calories</h2>
-                    <p>To maintain your current weight</p>
+                    <div class="calorie-result">
+                        <h2>{this.props.calories} calories</h2>
+                        <p> to maintain your current weight</p>
+                    </div>
 
                     <table class="table">
                         <tr>
@@ -43,8 +42,9 @@ export class Result extends React.Component{
                         </tr>
                     </table>
                     
-
                 </form>
+
+                
             </div>
         );
     }

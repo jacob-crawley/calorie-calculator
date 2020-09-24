@@ -25,7 +25,7 @@ export class ImperialForm extends React.Component{
 
     handleFeetChange(e){
         let newFeet = e.target.value;
-        if (newFeet.length == 0){
+        if (newFeet.length === 0){
             newFeet = 0;
         }
         this.setState({feet: newFeet});
@@ -34,11 +34,13 @@ export class ImperialForm extends React.Component{
 
     handleInchChange(e){
         let newInches = e.target.value;
-        if(newInches.length == 0){
+        // TODO: error handling for inches > 11
+        if(newInches.length === 0){
             newInches = 0;
-        }
+        } 
         this.setState({inches: newInches});
         this.handleHeightChange();
+        
     }
 
     handleHeightChange(){
@@ -46,22 +48,22 @@ export class ImperialForm extends React.Component{
         const FEET_TO_CM = 30.48;
         const IN_TO_CM = 2.54; 
         const totalHeight = (this.state.feet*FEET_TO_CM) + (this.state.inches*IN_TO_CM);
-        this.props.heightChange(totalHeight);
+        this.props.heightChange(totalHeight); 
     }
 
     render(){
         return (
             <div class="form-inputs">
                 <label for="product_name">Weight</label>
-                <input id="product_name"  type="text" maxlength="6" class="form-control" placeholder="(lbs)" onChange={this.handleWeightChange}/>
+                <input id="product_name"  type="text" maxLength="6" class="form-control" placeholder="(lbs)" onChange={this.handleWeightChange}/>
             
                 <label for="product_name">Age</label>
-                <input id="product_name" type="number" maxlength="5" class="form-control" placeholder="(years)"onChange={this.handleAgeChange}/>
+                <input id="product_name" type="text" maxLength="3" class="form-control" placeholder="(years 0-120)"onChange={this.handleAgeChange}/>
                 
                 <label for="product_name">Height - Feet</label>
-                <input id="product_name" type="number" maxlength="5" class="form-control" name="feet" onChange={this.handleFeetChange}/>
+                <input id="product_name" type="number" maxLength="5" class="form-control" name="feet" onChange={this.handleFeetChange}/>
                 <label for="product_name">Height - Inches</label>
-                <input id="product_name" type="number" maxlength="5" class="form-control" name="inches" onChange={this.handleInchChange}/>
+                <input id="product_name" type="number" maxLength="5" class="form-control" name="inches" onChange={this.handleInchChange}/>
                 
             </div>
         );

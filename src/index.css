@@ -86,6 +86,15 @@ label{
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
+
+.calorie-result h2, .calorie-result p {
+  display: inline;
+  padding-right: 5px;
+}
+
+.calorie-result p{
+  font-size: 20px;
+}
 footer{
   height: 20px;
   margin-top: -50px;
