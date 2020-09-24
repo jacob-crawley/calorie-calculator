@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {MetricForm} from './MetricForm';
 import {ImperialForm} from './ImperialForm';
 import {ActivityLevel} from './ActivityLevel';

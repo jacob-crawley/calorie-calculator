@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export class ActivityLevel extends React.Component{
     constructor(props) {
