@@ -95,6 +95,14 @@ label{
 .calorie-result p{
   font-size: 20px;
 }
+small a{
+  color: azure;
+}
+
+small a:hover{
+  color: lightslategrey;
+}
+
 footer{
   height: 20px;
   margin-top: -50px;
