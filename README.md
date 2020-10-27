@@ -1,8 +1,21 @@
-This is a simple react page designeed to calculate the number of calories a person would need to consume to maintain/gain/lose weight based on the gender, height, age and activity level.
+# Calorie Calculator
+A web app designed using React to calculate the number of calories a person would need to consume to maintain/gain/lose weight based on the gender, height, age and activity level.
+
+-------------------------------------------------------------------------
+## How to use
+The site presents a form where the user is able to enter their  gender, height, age and activity level. 
+
+As long as all these fields are filled correctly pressing the calculate button will reveal a second window displaying the calories required to maintain current weight, and a table showing the calories that need to be consumed to gain or lose weight. 
+
+From here any data in the form can be changed and pressing the calculate button again will change the result. Note, all calorie values are estimates calculated using the Harris-Benedict equation for BMR with multipliers for activity level.
+
+![image](https://user-images.githubusercontent.com/66950962/97300175-02e4d900-184e-11eb-8c94-2b2bb67be529.png)
+
 
 -------------------------------------------------------------------------
 
 ## Available Scripts
+The page isn't currently hosted on a web server, use these commands to run/develop locally.
 
 In the project directory, you can run:
 
